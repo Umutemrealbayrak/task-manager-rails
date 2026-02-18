@@ -16,8 +16,11 @@
 
     <div class="mb-3">
       <%= f.label :status, "Durum" %>
-      <%= f.select :status, Task.statuses.keys,
-          {}, class: "form-select" %>
+      <%= f.select :status,
+          Task.statuses.keys.map { |s| [s.humanize, s] },
+          {},
+          class: "form-select" %>
+
     </div>
 
     <div class="mb-3">

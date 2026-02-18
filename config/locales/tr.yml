@@ -1,0 +1,21 @@
+tr:
+  devise:
+    sessions:
+      signed_in: "Giriş başarılı."
+      signed_out: "Çıkış yapıldı."
+      already_signed_out: "Zaten çıkış yapılmış."
+
+    registrations:
+      signed_up: "Kayıt başarılı. Hoş geldiniz!"
+      updated: "Bilgileriniz güncellendi."
+      destroyed: "Hesabınız silindi."
+
+    failure:
+      invalid: "E-posta veya şifre hatalı."
+      not_found_in_database: "E-posta veya şifre hatalı."
+      unauthenticated: "Devam etmek için giriş yapmalısınız."
+
+  errors:
+    messages:
+      blank: "Boş bırakılamaz."
+      taken: "Zaten kullanılıyor."
