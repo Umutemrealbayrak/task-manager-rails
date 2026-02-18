@@ -142,7 +142,3 @@ Umut Emre Albayrak
 Software Engineer
 
 ---
-
-## 📩 İletişim
-
-info@massimocreative.com
