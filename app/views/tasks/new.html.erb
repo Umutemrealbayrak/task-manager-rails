@@ -1,0 +1,37 @@
+<h1>Yeni Görev</h1>
+
+<div class="card p-4">
+
+  <%= form_with model: @task do |f| %>
+
+    <div class="mb-3">
+      <%= f.label :title, "Başlık" %>
+      <%= f.text_field :title, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :description, "Açıklama" %>
+      <%= f.text_area :description, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :status, "Durum" %>
+      <%= f.select :status, Task.statuses.keys,
+          {}, class: "form-select" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :priority, "Öncelik" %>
+      <%= f.select :priority, Task.priorities.keys,
+          {}, class: "form-select" %>
+    </div>
+
+    <%= f.submit "Kaydet", class: "btn btn-success" %>
+
+    <%= link_to "Geri",
+        tasks_path,
+        class: "btn btn-secondary ms-2" %>
+
+  <% end %>
+
+</div>

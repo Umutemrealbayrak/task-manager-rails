@@ -1,0 +1,78 @@
+<h1 class="mb-4">Görevlerim</h1>
+
+<!-- Arama -->
+<%= form_with url: tasks_path, method: :get, local: true, class: "mb-3" do %>
+  <div class="input-group">
+    <%= text_field_tag :q, params[:q],
+        class: "form-control",
+        placeholder: "Başlığa göre ara..." %>
+
+    <button class="btn btn-primary">Ara</button>
+  </div>
+<% end %>
+
+<div class="mb-3">
+  <%= link_to "➕ Yeni Görev", new_task_path, class: "btn btn-success" %>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-bordered table-hover align-middle">
+
+    <thead class="table-dark">
+      <tr>
+        <th>Başlık</th>
+        <th>Açıklama</th>
+        <th>Durum</th>
+        <th>Öncelik</th>
+        <th class="text-center">İşlemler</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @tasks.each do |task| %>
+        <tr>
+
+          <td><%= task.title %></td>
+
+          <td><%= truncate(task.description, length: 50) %></td>
+
+          <td>
+            <span class="badge bg-secondary">
+              <%= task.status %>
+            </span>
+          </td>
+
+          <td>
+            <% if task.yuksek? %>
+              <span class="badge bg-danger">Yüksek</span>
+            <% elsif task.orta? %>
+              <span class="badge bg-warning text-dark">Orta</span>
+            <% else %>
+              <span class="badge bg-success">Düşük</span>
+            <% end %>
+          </td>
+
+          <td class="text-center">
+
+            <%= link_to "Göster",
+                task_path(task),
+                class: "btn btn-sm btn-info text-white" %>
+
+            <%= link_to "Düzenle",
+                edit_task_path(task),
+                class: "btn btn-sm btn-warning" %>
+
+            <%= button_to "Sil",
+                task_path(task),
+                method: :delete,
+                data: { confirm: "Emin misin?" },
+                class: "btn btn-sm btn-danger d-inline" %>
+
+          </td>
+
+        </tr>
+      <% end %>
+    </tbody>
+
+  </table>
+</div>
