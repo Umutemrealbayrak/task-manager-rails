@@ -19,3 +19,18 @@ tr:
     messages:
       blank: "Boş bırakılamaz."
       taken: "Zaten kullanılıyor."
+  activerecord:
+    models:
+      task: "Görev"
+    attributes:
+      task:
+        title: "Başlık"
+        description: "Açıklama"
+        status: "Durum"
+        priority: "Öncelik"
+
+  helpers:
+    submit:
+      task:
+        create: "Görev Oluştur"
+        update: "Görev Güncelle"

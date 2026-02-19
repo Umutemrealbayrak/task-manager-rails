@@ -1,40 +1,48 @@
-<h1>Görevi Düzenle</h1>
+<div class="row justify-content-center">
+  <div class="col-md-8 col-lg-6">
 
-<div class="card p-4">
+<h2>Görev Düzenle</h2>
 
-  <%= form_with model: @task do |f| %>
+<%= form_with model: @task do |f| %>
 
-    <div class="mb-3">
-      <%= f.label :title, "Başlık" %>
-      <%= f.text_field :title, class: "form-control" %>
-    </div>
+  <div class="mb-3">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
 
-    <div class="mb-3">
-      <%= f.label :description, "Açıklama" %>
-      <%= f.text_area :description, class: "form-control" %>
-    </div>
+  <div class="mb-3">
+    <%= f.label :description %>
+    <%= f.text_area :description, class: "form-control" %>
+  </div>
 
-    <div class="mb-3">
-      <%= f.label :status, "Durum" %>
-      <%= f.select :status,
-          Task.statuses.keys.map { |s| [s.humanize, s] },
-          {},
-          class: "form-select" %>
+  <div class="mb-3">
+    <%= f.label :status %>
+    <%= f.select :status,
+      Task.statuses.keys.map { |s| [s.humanize, s] },
+      {},
+      class: "form-select" %>
+  </div>
 
-    </div>
+  <div class="mb-3">
+    <%= f.label :priority %>
+    <%= f.select :priority,
+      Task.priorities.keys.map { |p| [p.humanize, p] },
+      {},
+      class: "form-select" %>
+  </div>
 
-    <div class="mb-3">
-      <%= f.label :priority, "Öncelik" %>
-      <%= f.select :priority, Task.priorities.keys,
-          {}, class: "form-select" %>
-    </div>
+  <button type="button"class="btn btn-warning"onclick="showConfirm(
+      'Güncelle',
+      'Kaydedilsin mi?',
+      this.closest('form')
+    )">
 
-    <%= f.submit "Güncelle", class: "btn btn-warning" %>
+    Güncelle
+  </button>
 
-    <%= link_to "Geri",
-        tasks_path,
-        class: "btn btn-secondary ms-2" %>
+  <%= link_to "Geri", tasks_path, class: "btn btn-secondary ms-2" %>
 
-  <% end %>
+<% end %>
 
+  </div>
 </div>

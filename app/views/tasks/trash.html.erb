@@ -1,0 +1,57 @@
+<h2>🗑️ Çöp Kutusu</h2>
+
+<%= link_to "← Görevlerim", tasks_path, class: "btn btn-secondary mb-3" %>
+
+<table class="table table-bordered">
+
+  <thead class="table-dark">
+    <tr>
+      <th>Başlık</th>
+      <th>Açıklama</th>
+      <th>Silinme Tarihi</th>
+      <th>İşlem</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% @tasks.each do |task| %>
+
+      <tr>
+
+        <td><%= task.title %></td>
+        <td><%= task.description %></td>
+        <td><%= task.deleted_at.strftime("%d.%m.%Y %H:%M") %></td>
+
+        <td>
+
+          <%= button_to "Geri Yükle",
+              restore_task_path(task),
+              method: :post,
+              class: "btn btn-success btn-sm" %>
+
+          <%= form_with url: hard_delete_task_path(task),
+              method: :delete,
+              class: "d-inline" do %>
+
+  <button type="button"class="btn btn-danger btn-sm" onclick="showConfirm(
+      'Kalıcı Sil',
+      'Bu görev kalıcı olarak silinsin mi?',
+      this.closest('form')
+    )">
+
+    Kalıcı Sil
+  </button>
+
+<% end %>
+
+
+        </td>
+
+      </tr>
+
+    <% end %>
+
+  </tbody>
+
+</table>

@@ -1,78 +1,112 @@
-<h1 class="mb-4">Görevlerim</h1>
+<div class="d-flex flex-wrap justify-content-between mb-4">
 
-<!-- Arama -->
-<%= form_with url: tasks_path, method: :get, local: true, class: "mb-3" do %>
-  <div class="input-group">
-    <%= text_field_tag :q, params[:q],
-        class: "form-control",
-        placeholder: "Başlığa göre ara..." %>
+  <h2>Görevlerim</h2>
 
-    <button class="btn btn-primary">Ara</button>
+  <div class="d-flex gap-3 flex-wrap">
+
+    <%= link_to "➕ Yeni Görev",
+      new_task_path,
+      class: "btn btn-success btn-lg" %>
+
+    <%= link_to "🔼 Önceliğe Göre Artan Sıralama",
+      tasks_path(sort: "priority_asc"),
+      class: "btn btn-primary btn-lg" %>
+
+    <%= link_to "🔽 Önceliğe Göre Azalan Sıralama",
+      tasks_path(sort: "priority_desc"),
+      class: "btn btn-dark btn-lg" %>
+
   </div>
-<% end %>
 
-<div class="mb-3">
-  <%= link_to "➕ Yeni Görev", new_task_path, class: "btn btn-success" %>
 </div>
 
-<div class="table-responsive">
-  <table class="table table-bordered table-hover align-middle">
+<div class="table-responsive" id="tasks-list">
 
-    <thead class="table-dark">
-      <tr>
-        <th>Başlık</th>
-        <th>Açıklama</th>
-        <th>Durum</th>
-        <th>Öncelik</th>
-        <th class="text-center">İşlemler</th>
-      </tr>
-    </thead>
+<table class="table table-bordered table-hover">
 
-    <tbody>
-      <% @tasks.each do |task| %>
-        <tr>
+<thead class="table-dark">
+<tr>
+  <th>Başlık</th>
+  <th>Açıklama</th>
+  <th>Durum</th>
+  <th>Öncelik</th>
+  <th>İşlem</th>
+</tr>
+</thead>
 
-          <td><%= task.title %></td>
+<tbody>
 
-          <td><%= truncate(task.description, length: 50) %></td>
+<% @tasks.each do |task| %>
 
-          <td>
-            <span class="badge bg-secondary">
-              <%= task.status.humanize %>
-            </span>
-          </td>
+<tr>
 
-          <td>
-            <% if task.yuksek? %>
-              <span class="badge bg-danger">Yüksek</span>
-            <% elsif task.orta? %>
-              <span class="badge bg-warning text-dark">Orta</span>
-            <% else %>
-              <span class="badge bg-success">Düşük</span>
-            <% end %>
-          </td>
+<td><%= task.title %></td>
+<td><%= task.description %></td>
 
-          <td class="text-center">
+<!-- DURUM -->
+<td>
 
-            <%= link_to "Göster",
-                task_path(task),
-                class: "btn btn-sm btn-info text-white" %>
+  <% status_class =
+    case task.status
+    when "bekliyor" then "bg-warning"
+    when "devam_ediyor" then "bg-primary"
+    when "tamamlandi" then "bg-success"
+    end %>
 
-            <%= link_to "Düzenle",
-                edit_task_path(task),
-                class: "btn btn-sm btn-warning" %>
+  <span class="badge <%= status_class %>">
+    <%= task.status.humanize %>
+  </span>
 
-            <%= button_to "Sil",
-                task_path(task),
-                method: :delete,
-                data: { confirm: "Emin misin?" },
-                class: "btn btn-sm btn-danger d-inline" %>
+</td>
 
-          </td>
+<!-- ÖNCELİK -->
+<td>
 
-        </tr>
-      <% end %>
-    </tbody>
+  <% priority_class =
+    case task.priority
+    when "dusuk" then "bg-success"
+    when "orta" then "bg-warning"
+    when "yuksek" then "bg-danger"
+    end %>
 
-  </table>
+  <span class="badge <%= priority_class %>">
+    <%= task.priority.humanize %>
+  </span>
+
+</td>
+
+
+<td>
+
+<div class="d-grid gap-2 d-md-flex">
+
+<%= link_to "Göster", task, class: "btn btn-info btn-sm" %>
+<%= link_to "Düzenle", edit_task_path(task), class: "btn btn-warning btn-sm" %>
+
+<%= form_with model: task, method: :delete, class: "d-inline" do %>
+
+<button type="button"
+  class="btn btn-danger btn-sm w-100"
+  onclick="showConfirm(
+    'Sil',
+    'Bu görev silinsin mi?',
+    this.closest('form')
+  )">
+
+Sil
+
+</button>
+
+<% end %>
+
+</div>
+
+</td>
+
+</tr>
+
+<% end %>
+
+</tbody>
+</table>
 </div>

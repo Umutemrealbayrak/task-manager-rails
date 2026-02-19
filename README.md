@@ -1,144 +1,71 @@
-# 📝 Task Manager Application
+# 📝 Task Manager - Ruby on Rails
 
-Bu proje, kullanıcıların kendi görevlerini oluşturup yönetebildiği basit bir Görev Yönetim Sistemi (Task Manager) uygulamasıdır.
+Bu proje Ruby on Rails kullanılarak geliştirilmiş bir görev yönetim uygulamasıdır. Kullanıcılar kayıt olabilir, giriş yapabilir ve kendi görevlerini oluşturup yönetebilir. Proje modern bir arayüz, kullanıcı doğrulama sistemi ve temel CRUD işlemlerini içermektedir.
 
-Uygulama Ruby on Rails kullanılarak geliştirilmiş olup, kullanıcı kimlik doğrulaması için Devise gemi entegre edilmiştir.
+## 🚀 Özellikler
 
----
-
-## 📌 Proje Özellikleri
-
-### 🔐 Kullanıcı Yönetimi (Authentication)
-- Kullanıcı kayıt olabilir.
-- Kullanıcı giriş ve çıkış yapabilir.
-- Giriş yapmadan görev sayfalarına erişilemez.
-- Her kullanıcı sadece kendi görevlerini görüntüleyebilir.
-
-### ✅ Görev Yönetimi (CRUD)
-- Görev oluşturma
-- Görev listeleme
-- Görev güncelleme
-- Görev silme
-- Görev durumları:
-  - Bekliyor
-  - Devam Ediyor
-  - Tamamlandı
-
-### ⭐ Bonus Özellikler
-- Öncelik sistemi:
-  - Düşük
-  - Orta
-  - Yüksek
-- Başlığa göre arama (filtreleme)
+- Kullanıcı kayıt ve giriş sistemi (Devise)
+- Görev oluşturma, düzenleme ve silme
+- Çöp kutusu (Soft Delete) sistemi
+- Silinen görevleri geri yükleme
+- Öncelik sistemi (Düşük / Orta / Yüksek)
+- Durum sistemi (Bekliyor / Devam Ediyor / Tamamlandı)
+- Canlı arama (Live Search)
 - Önceliğe göre sıralama
-- Responsive (mobil uyumlu) tasarım
-- Bootstrap ile modern arayüz
+- Responsive tasarım (Bootstrap)
+- Silme ve güncelleme için onay modalı
+- Flash mesaj bildirimleri
 
----
-
-## 🚀 Kullanılan Teknolojiler
+## 🛠️ Kullanılan Teknolojiler
 
 - Ruby 3.4.8
-- Ruby on Rails 8.1.2
-- Devise (Authentication)
+- Rails 8.1.2
 - SQLite3
+- Devise
 - Bootstrap 5
-- HTML / ERB
+- Turbo / Hotwire
+- HTML / ERB / JavaScript
 
----
+## ⚙️ Kurulum
 
-## 💻 Kurulum ve Çalıştırma
+Projeyi bilgisayarınıza klonlayın:
 
-### 1️⃣ Projeyi Klonlayın
+git clone <repository-url>  
+cd task-manager-rails
 
-```bash
-git clone <REPO_LINK>
-cd task_manager
-```
+Gerekli paketleri yükleyin:
 
-### 2️⃣ Ruby Versiyonunu Kontrol Edin
-
-```bash
-ruby -v
-```
-
-### 3️⃣ Gerekli Gemleri Yükleyin
-
-```bash
 bundle install
-```
 
-### 4️⃣ Veritabanını Oluşturun
+Veritabanını oluşturun:
 
-```bash
-rails db:create
+rails db:create  
 rails db:migrate
-```
 
-### 5️⃣ Sunucuyu Başlatın
+Sunucuyu çalıştırın:
 
-```bash
-rails server
-```
-
-veya
-
-```bash
 rails s
-```
 
-### 6️⃣ Tarayıcıdan Erişim
+Tarayıcıdan açın: http://localhost:3000
 
-```
-http://localhost:3000
-```
+## 👤 Kullanım
 
----
+- Kayıt Ol sayfasından hesap oluşturabilirsiniz
+- Giriş yaptıktan sonra görev ekleyebilirsiniz
+- Görevleri düzenleyebilir, silebilir ve çöp kutusuna taşıyabilirsiniz
+- Çöp kutusundan görevleri geri yükleyebilir veya kalıcı silebilirsiniz
+- Üst menüdeki arama alanı ile başlığa göre filtreleme yapabilirsiniz
+- Önceliğe göre sıralama yapabilirsiniz
 
-## ⚙️ Faydalı Komutlar
+## 🗑️ Çöp Kutusu Sistemi
 
-```bash
-rails routes
-rails console
-rails c
-rails db:drop db:create db:migrate
-rails test
-```
+Silinen görevler tamamen silinmez, çöp kutusuna taşınır. Buradan geri yüklenebilir veya kalıcı olarak silinebilir.
 
----
+## 🎨 Arayüz
 
-## 🖥️ Uygulama Kullanımı
+Bootstrap kullanılarak responsive tasarım oluşturulmuştur. Masaüstü ve mobil cihazlarla uyumludur. Durum ve öncelikler renkli etiketlerle gösterilir. Silme ve güncelleme işlemleri modal onay sistemi ile yapılır.
 
-1. Kayıt olun ve giriş yapın.
-2. Yeni görev oluşturun.
-3. Görevleri düzenleyin veya silin.
-4. Arama kutusu ile filtreleyin.
-5. Öncelik ve durum bilgilerini yönetin.
-
----
-
-## 🔒 Güvenlik
-
-- Devise ile kimlik doğrulama
-- before_action :authenticate_user!
-- Kullanıcıya özel erişim
-
----
-
-## 📁 Proje Yapısı
-
-```
-app/
- ├── controllers/
- ├── models/
- └── views/
-```
-
----
-
-## 👤 Geliştirici
+## 👨‍💻 Geliştirici
 
 Umut Emre Albayrak  
 Software Engineer
-
----

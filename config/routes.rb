@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {
+  registrations: "users/registrations"
+}
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -14,4 +16,7 @@ Rails.application.routes.draw do
   # root "posts#index"
 resources :tasks
 root "tasks#index"
+get "trash", to: "tasks#trash"
+post "tasks/:id/restore", to: "tasks#restore", as: :restore_task
+delete "tasks/:id/hard_delete", to: "tasks#hard_delete", as: :hard_delete_task
 end
